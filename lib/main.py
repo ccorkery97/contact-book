@@ -23,6 +23,9 @@ db.create_tables(models)
 conor = Contact(first_name = 'Conor', number = '123-456-7890')
 conor.save()
 
+bud = Contact(first_name = 'Bud', number = '453-210-2342', email = 'bud@bud.com', address = '1111 bud lane, budtown FL')
+bud.save()
+
 
 
 def main_menu():
@@ -38,6 +41,8 @@ def main_menu():
             show_contact_list()
         elif choice == 'Exit':
             leave = 'Exit'
+        elif choice == 'Add Contact':
+            add_contact()
 
 
 def show_contact_list():
@@ -51,22 +56,38 @@ def show_contact_list():
         if choice_c == 'menu':
             back = 'menu'
         else:
-            show_contact_info(choice_c)
+            back = show_contact_info(choice_c)
 
 
 def show_contact_info(contact_choice):
     leave = ''
     while leave != 'back':
         print(f"-----{contact_choice}-----")
-        for contact in Contact.select():
-                if contact_choice == contact.first_name:
-                    print(contact.number)
-                    print(contact.email)
-                    print(contact.address)
-                    print("--------------------")
+        for contact in Contact.select().where(Contact.first_name == contact_choice):
+                print(contact.number)
+                print(contact.email)
+                print(contact.address)
+                print("--------------------")
         choice_i = input()
         if choice_i == 'back':
             leave = 'back'
+        elif choice_i == 'menu':
+            leave = 'back'
+            return 'menu'
+
+
+def add_contact():
+    leave = ''
+    while leave != 'back':
+        new_contact_first_name = input('First name: ')
+        new_contact_last_name = input('Last name: ')
+        new_contact_number = input('number: ')
+        new_contact_email = input('email: ')
+        new_contact_address = input('address: ')
+        new_contact = Contact(first_name = new_contact_first_name, number = new_contact_number, last_name = new_contact_last_name, email = new_contact_email, address = new_contact_address)
+        new_contact.save()
+        leave = 'back'
+
 
 
 
