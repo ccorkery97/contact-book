@@ -51,12 +51,22 @@ def show_contact_list():
         if choice_c == 'menu':
             back = 'menu'
         else:
-            for contact in Contact.select():
-                if choice_c == contact.first_name:
-                    print(contact.first_name)
+            show_contact_info(choice_c)
+
+
+def show_contact_info(contact_choice):
+    leave = ''
+    while leave != 'back':
+        print(f"-----{contact_choice}-----")
+        for contact in Contact.select():
+                if contact_choice == contact.first_name:
                     print(contact.number)
-
-
+                    print(contact.email)
+                    print(contact.address)
+                    print("--------------------")
+        choice_i = input()
+        if choice_i == 'back':
+            leave = 'back'
 
 
 
