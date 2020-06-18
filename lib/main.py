@@ -17,14 +17,13 @@ class Contact(BaseModel):
 
 models = [Contact]
 
-db.drop_tables(models)
 db.create_tables(models)
 
-conor = Contact(first_name = 'Conor', number = '123-456-7890')
-conor.save()
-
-bud = Contact(first_name = 'Bud', number = '453-210-2342', email = 'bud@bud.com', address = '1111 bud lane, budtown FL')
-bud.save()
+#conor = Contact(first_name = 'Conor', number = '123-456-7890')
+#conor.save()
+#
+#bud = Contact(first_name = 'Bud', number = '453-210-2342', email = 'bud@bud.com', address = '1111 bud lane, budtown FL')
+#bud.save()
 
 
 
@@ -78,7 +77,7 @@ def show_contact_info(contact_choice):
 
 def add_contact():
     leave = ''
-    while leave != 'back':
+    while leave != 'menu':
         new_contact_first_name = input('First name: ')
         new_contact_last_name = input('Last name: ')
         new_contact_number = input('number: ')
@@ -86,7 +85,8 @@ def add_contact():
         new_contact_address = input('address: ')
         new_contact = Contact(first_name = new_contact_first_name, number = new_contact_number, last_name = new_contact_last_name, email = new_contact_email, address = new_contact_address)
         new_contact.save()
-        leave = 'back'
+        leave = show_contact_info(new_contact_first_name)
+        
 
 
 
