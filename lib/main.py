@@ -1,5 +1,6 @@
 from peewee import *
 
+
 db = PostgresqlDatabase('contacts', user='postgres', password='', host='localhost', port=5432)
 
 db.connect()
@@ -73,6 +74,8 @@ def show_contact_info(contact_choice):
         elif choice_i == 'menu':
             leave = 'back'
             return 'menu'
+        elif choice_i == 'update':
+            update_contact(contact_choice)
 
 
 def add_contact():
@@ -88,7 +91,31 @@ def add_contact():
         leave = show_contact_info(new_contact_first_name)
         
 
+def update_contact(contact_name):
+    update_field = input("What do you want to update? ")
+    update_value = input(f"new {update_field}: ")
+    for contact in Contact.select().where(Contact.first_name == contact_name):
+        if update_field == 'first name':
+            contact.first_name = update_value
+            contact.save()
+        if update_field == 'last name':
+            contact.last_name = update_value
+            contact.save()
+        if update_field == 'number':
+            contact.number = update_value
+            contact.save()
+        if update_field == 'email':
+            contact.email = update_value
+            contact.save()
+        if update_field == 'address':
+            contact.address = update_value
+            contact.save()
+
+
+
+
 
 
 
 main_menu()
+
