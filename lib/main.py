@@ -76,6 +76,9 @@ def show_contact_info(contact_choice):
             return 'menu'
         elif choice_i == 'update':
             update_contact(contact_choice)
+        elif choice_i == 'delete':
+            delete_contact(contact_choice)
+            leave = 'back'
 
 
 def add_contact():
@@ -111,6 +114,12 @@ def update_contact(contact_name):
             contact.address = update_value
             contact.save()
 
+
+def delete_contact(contact_name):
+    sure = input("Are you sure you want to delete this contact? ")
+    if sure == 'yes':
+        for contact in Contact.select().where(Contact.first_name == contact_name):
+            contact.delete_instance()
 
 
 
