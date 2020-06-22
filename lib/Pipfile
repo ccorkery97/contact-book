@@ -9,6 +9,7 @@ verify_ssl = true
 peewee = "*"
 psycopg2-binary = "*"
 autopep8 = "*"
+3-4-3 = "*"
 
 [requires]
 python_version = "3.8"

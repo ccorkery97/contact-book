@@ -1,6 +1,7 @@
 from peewee import *
 
 
+
 db = PostgresqlDatabase('contacts', user='postgres', password='', host='localhost', port=5432)
 
 db.connect()
@@ -52,7 +53,7 @@ def show_contact_list():
         for contact in Contact.select():
             print(contact.first_name)
         print('------------------------')
-        choice_c = input('You can go back to menu or type one of the names to see more: ')
+        choice_c = input()
         if choice_c == 'menu':
             back = 'menu'
         else:
@@ -123,8 +124,6 @@ def delete_contact(contact_name):
 
 
 
-
-
-
 main_menu()
+
 
